@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">levantaientoInventarios</string>
+    <string name="titulo_barra">AC</string>
+    <string name="titulo_barra2">APP Inventarios</string>
+    <string name="todo">TODO</string>
 </resources>
