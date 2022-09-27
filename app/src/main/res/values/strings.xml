@@ -3,4 +3,9 @@
     <string name="titulo_barra">AC</string>
     <string name="titulo_barra2">APP Inventarios</string>
     <string name="todo">TODO</string>
+    <string name="usuario">Usuario</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="nombreUsuario">Nombre de Usuario</string>
+    <string name="contraseñaApp">Contraseña de la App</string>
+    <string name="login">Log In</string>
 </resources>
