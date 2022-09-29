@@ -8,4 +8,8 @@
     <string name="nombreUsuario">Nombre de Usuario</string>
     <string name="contraseñaApp">Contraseña de la App</string>
     <string name="login">Log In</string>
+    <string name="sucursales">Selecciona una sucursal</string>
+    <string name="bodegas">Selecciona la bodega</string>
+    <string name="rubros">Selecciona el rubro</string>
+    <string name="iniciar">Iniciar</string>
 </resources>
