@@ -12,4 +12,12 @@
     <string name="bodegas">Selecciona la bodega</string>
     <string name="rubros">Selecciona el rubro</string>
     <string name="iniciar">Iniciar</string>
+    <string name="scanqr">Scan QR</string>
+    <string name="Primerconteo">Primer conteo</string>
+    <string name="Segundoconteo">Segundo conteo</string>
+    <string name="Terceconteo">Tercer conteo</string>
+    <string name="conteo">Conteo</string>
+    <string name="guardar">Guardar</string>
+    <string name="finalizar">Finalizar</string>
+    <string name="result_not_found">Sin Resultados</string>
 </resources>
