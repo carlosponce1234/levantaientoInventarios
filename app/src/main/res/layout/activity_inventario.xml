@@ -17,7 +17,7 @@
         android:layout_width="355dp"
         android:layout_height="270dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="172dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/list_back"
         android:elevation="8dp"
@@ -78,14 +78,13 @@
             android:id="@+id/etiqueta"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/poppins_semibold_italic"
             android:textAlignment="center"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="@tools:sample/date/hhmmss" />
 
@@ -93,43 +92,97 @@
             android:id="@+id/alto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="45dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/ubicacion"
-            app:layout_constraintStart_toEndOf="@+id/ancho"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            android:layout_marginTop="42dp"
+            android:fontFamily="@font/poppins_semibold_italic"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.449"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descArt"
+            tools:text="@tools:sample/date/hhmm" />
+
+        <TextView
+            android:id="@+id/alto2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_semibold_italic"
+            android:text="@string/alto"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.451"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descArt"
+            tools:text="@tools:sample/date/hhmm" />
 
         <TextView
             android:id="@+id/ancho"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginBottom="45dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/ubicacion"
+            android:layout_marginTop="42dp"
+            android:fontFamily="@font/poppins_semibold_italic"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.192"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/descArt"
+            tools:text="@tools:sample/date/hhmm" />
+
+        <TextView
+            android:id="@+id/ancho2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_semibold_italic"
+            android:text="@string/ancho"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.194"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descArt"
+            tools:text="@tools:sample/date/hhmm" />
 
         <TextView
             android:id="@+id/largo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/alto"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.466" />
+            android:layout_marginTop="42dp"
+            android:fontFamily="@font/poppins_semibold_italic"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.701"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descArt"
+            tools:text="@tools:sample/date/hhmm" />
+
+        <TextView
+            android:id="@+id/largo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_semibold_italic"
+            android:text="@string/largo"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.702"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descArt"
+            tools:text="@tools:sample/date/hhmm" />
 
         <TextView
             android:id="@+id/codigo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="61dp"
-            android:text="TextView"
+            android:fontFamily="@font/poppins_semibold_italic"
+            android:textAlignment="center"
+            android:textColor="@color/black"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,13 +193,16 @@
             android:id="@+id/brazo"
             android:layout_width="151dp"
             android:layout_height="25dp"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="32dp"
             android:layout_marginBottom="8dp"
-            android:text="TextView"
+            android:fontFamily="@font/poppins_semibold_italic"
+            android:textAlignment="center"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ubicacion"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.759" />
+            app:layout_constraintVertical_bias="0.831"
+            tools:text="@tools:sample/first_names" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -200,7 +256,7 @@
             tools:ignore="DuplicateSpeakableTextCheck" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnguardar"
             android:layout_width="266dp"
             android:layout_height="52dp"
             android:layout_marginBottom="16dp"

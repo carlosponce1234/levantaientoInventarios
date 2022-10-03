@@ -31,7 +31,6 @@ class Sucursales : AppCompatActivity() {
             intent.putExtra("NombreUsuario", nombreUser)
             intent.putExtra("UserLogin", loginUser)
             intent.putExtra("Sucursal", sucursal)
-
             startActivity(intent)
         }
     }

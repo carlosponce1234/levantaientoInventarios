@@ -20,4 +20,7 @@
     <string name="guardar">Guardar</string>
     <string name="finalizar">Finalizar</string>
     <string name="result_not_found">Sin Resultados</string>
+    <string name="ancho">Ancho</string>
+    <string name="alto">Alto</string>
+    <string name="largo">Largo</string>
 </resources>
