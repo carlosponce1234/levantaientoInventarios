@@ -43,14 +43,40 @@ class Inventario : AppCompatActivity() {
             val ancho = this.findViewById<TextView>(R.id.ancho).text.toString()
             val alto = this.findViewById<TextView>(R.id.alto).text.toString()
             val largo = this.findViewById<TextView>(R.id.largo).text.toString()
-            val codMedida = Levantamiento().getCodMedida(alto.toFloat(),ancho.toFloat(),largo.toFloat())
+            val codMedida =
+                Levantamiento().getCodMedida(alto.toFloat(), ancho.toFloat(), largo.toFloat())
             val codLev = codUser?.let { it1 ->
-                Levantamiento().getCodLevantamiento(polin,codBodega,codSucursal,it1.toInt(),codRubro)
+                Levantamiento().getCodLevantamiento(
+                    polin,
+                    codBodega,
+                    codSucursal,
+                    it1.toInt(),
+                    codRubro
+                )
             }
             val pconteo = this.findViewById<TextView>(R.id.conteo).text.toString()
-            if(Levantamiento().piezaCompleta(codMedida,codigo)){
-                if(!Levantamiento().etiquetaRepetida(etiqueta.toInt(),codLev.toString().toInt(),codBodega)){
-                    Levantamiento().guardarPconteo(codLev.toString().toInt(),codigo,brazo,codMedida,ancho.toFloat(),alto.toFloat(),largo.toFloat(),pconteo.toFloat(),etiqueta.toInt(),codBodega)
+            if (pconteo.isEmpty() || pconteo == "0" || pconteo.isBlank()) {
+                Toast.makeText(this, "Debe ingresar el conteo", Toast.LENGTH_LONG).show()
+            } else {
+                if (Levantamiento().piezaCompleta(codMedida, codigo)) {
+                    if (!Levantamiento().etiquetaRepetida(
+                            etiqueta.toInt(),
+                            codLev.toString().toInt(),
+                            codBodega
+                        )
+                    ) {
+                        Levantamiento().guardarPconteo(
+                            codLev.toString().toInt(),
+                            codigo,
+                            brazo,
+                            codMedida,
+                            ancho.toFloat(),
+                            alto.toFloat(),
+                            largo.toFloat(),
+                            pconteo.toFloat(),
+                            etiqueta.toInt(),
+                            codBodega
+                        )
                         this.findViewById<TextView>(R.id.conteo).text = ""
                         this.findViewById<TextView>(R.id.etiqueta).text = ""
                         this.findViewById<TextView>(R.id.ubicacion).text = ""
@@ -60,50 +86,78 @@ class Inventario : AppCompatActivity() {
                         this.findViewById<TextView>(R.id.ancho).text = ""
                         this.findViewById<TextView>(R.id.alto).text = ""
                         this.findViewById<TextView>(R.id.largo).text = ""
-                        Toast.makeText(this,"Guardado",Toast.LENGTH_SHORT).show()
-                }else{
-                    if (Levantamiento().conteoCompleto(codLev.toString().toInt(),codBodega,codigo,etiqueta.toInt())){
-                        Toast.makeText(this,"Etiqueta ya fue levantada",Toast.LENGTH_SHORT).show()
-                        this.findViewById<TextView>(R.id.conteo).text = ""
-                        this.findViewById<TextView>(R.id.etiqueta).text = ""
-                        this.findViewById<TextView>(R.id.ubicacion).text = ""
-                        this.findViewById<TextView>(R.id.brazo).text = ""
-                        this.findViewById<TextView>(R.id.codigo).text = ""
-                        this.findViewById<TextView>(R.id.descArt).text = ""
-                        this.findViewById<TextView>(R.id.ancho).text = ""
-                        this.findViewById<TextView>(R.id.alto).text = ""
-                        this.findViewById<TextView>(R.id.largo).text = ""
-                    }else{
-                       if (Levantamiento().tieneSegundoConteo(codLev.toString().toInt(),codBodega,codigo,etiqueta.toInt())){
-                           val tipo = 1
-                           Levantamiento().updateConteo(codLev.toString().toInt(),codigo,etiqueta.toInt(),codBodega,pconteo.toFloat(),tipo)
-                       }else{
-                           val tipo = 2
-                           Levantamiento().updateConteo(codLev.toString().toInt(),codigo,etiqueta.toInt(),codBodega,pconteo.toFloat(),tipo)
-                       }
-                        this.findViewById<TextView>(R.id.conteo).text = ""
-                        this.findViewById<TextView>(R.id.etiqueta).text = ""
-                        this.findViewById<TextView>(R.id.ubicacion).text = ""
-                        this.findViewById<TextView>(R.id.brazo).text = ""
-                        this.findViewById<TextView>(R.id.codigo).text = ""
-                        this.findViewById<TextView>(R.id.descArt).text = ""
-                        this.findViewById<TextView>(R.id.ancho).text = ""
-                        this.findViewById<TextView>(R.id.alto).text = ""
-                        this.findViewById<TextView>(R.id.largo).text = ""
-                        Toast.makeText(this,"Guardado",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Guardado", Toast.LENGTH_SHORT).show()
+                    } else {
+                        if (Levantamiento().conteoCompleto(
+                                codLev.toString().toInt(),
+                                codBodega,
+                                codigo,
+                                etiqueta.toInt()
+                            )
+                        ) {
+                            Toast.makeText(this, "Etiqueta ya fue levantada", Toast.LENGTH_SHORT)
+                                .show()
+                            this.findViewById<TextView>(R.id.conteo).text = ""
+                            this.findViewById<TextView>(R.id.etiqueta).text = ""
+                            this.findViewById<TextView>(R.id.ubicacion).text = ""
+                            this.findViewById<TextView>(R.id.brazo).text = ""
+                            this.findViewById<TextView>(R.id.codigo).text = ""
+                            this.findViewById<TextView>(R.id.descArt).text = ""
+                            this.findViewById<TextView>(R.id.ancho).text = ""
+                            this.findViewById<TextView>(R.id.alto).text = ""
+                            this.findViewById<TextView>(R.id.largo).text = ""
+                        } else {
+                            if (Levantamiento().tieneSegundoConteo(
+                                    codLev.toString().toInt(),
+                                    codBodega,
+                                    codigo,
+                                    etiqueta.toInt()
+                                )
+                            ) {
+                                val tipo = 1
+                                Levantamiento().updateConteo(
+                                    codLev.toString().toInt(),
+                                    codigo,
+                                    etiqueta.toInt(),
+                                    codBodega,
+                                    pconteo.toFloat(),
+                                    tipo
+                                )
+                            } else {
+                                val tipo = 2
+                                Levantamiento().updateConteo(
+                                    codLev.toString().toInt(),
+                                    codigo,
+                                    etiqueta.toInt(),
+                                    codBodega,
+                                    pconteo.toFloat(),
+                                    tipo
+                                )
+                            }
+                            this.findViewById<TextView>(R.id.conteo).text = ""
+                            this.findViewById<TextView>(R.id.etiqueta).text = ""
+                            this.findViewById<TextView>(R.id.ubicacion).text = ""
+                            this.findViewById<TextView>(R.id.brazo).text = ""
+                            this.findViewById<TextView>(R.id.codigo).text = ""
+                            this.findViewById<TextView>(R.id.descArt).text = ""
+                            this.findViewById<TextView>(R.id.ancho).text = ""
+                            this.findViewById<TextView>(R.id.alto).text = ""
+                            this.findViewById<TextView>(R.id.largo).text = ""
+                            Toast.makeText(this, "Guardado", Toast.LENGTH_SHORT).show()
+                        }
                     }
+                } else {
+                    Toast.makeText(this, "Pieza no completa", Toast.LENGTH_SHORT).show()
                 }
-            }else{
-                Toast.makeText(this,"Pieza no completa",Toast.LENGTH_SHORT).show()
             }
         }
-
         val btnFinalizar = this.findViewById<Button>(R.id.finalizar)
         btnFinalizar.setOnClickListener(){
             val intent = Intent(this, RubrosBodegas::class.java)
             intent.putExtra("CodUser", codUser)
             intent.putExtra("UserLogin", loginUser)
             intent.putExtra("Sucursal", sucursal)
+            startActivity(intent)
         }
     }
 
@@ -144,10 +198,10 @@ class Inventario : AppCompatActivity() {
                     polin.text = datos[1]
                     brazo.text = datos[2]
                     codigo.text = datos[3]
-                    descripcion.text = datos[4]
                     ancho.text = datos[5]
                     alto.text = datos[6]
                     largo.text = datos[7]
+                    descripcion.text = datos[4]
 
                 } catch (e: Exception) {
                     // Data not in the expected format. So, whole object as toast message.

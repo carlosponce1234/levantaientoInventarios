@@ -40,6 +40,18 @@ class Levantamiento {
         return codSucursal
     }
 
+    fun getDescArticulo(codArticulo: Int) : String {
+        val db = SfexConn().dbConn()
+        val sql = "SELECT DesCatArt FROM Inventario.CatArticulos WHERE CodArticulo = $codArticulo"
+        val stmt = db?.prepareStatement(sql)
+        val rs = stmt?.executeQuery()
+        var descArticulo = "No existe"
+        while (rs?.next()==true) {
+            descArticulo = rs.getString("DesCatArt")
+        }
+        return descArticulo
+    }
+
     /* fun getCodUser(user: String) : Int {
         val db = LevInvconn().dbConn()
         val sql = "SELECT CodUser FROM UserMovilApp WHERE UserLogin = CAST( '$user' as nvarchar)"
