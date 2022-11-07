@@ -6,7 +6,7 @@ class Levantamiento {
 
     fun getCodBodega(bodega:String) : Int {
         val db = SfexConn().dbConn()
-        val sql = "SELECT CodBodega FROM Inventario.CatBodegas WHERE DesBodega = CAST( '$bodega' as nvarchar)"
+        val sql = "SELECT CodBodega FROM Inventario.CatBodegas WHERE DesBodega = CAST( '$bodega' as nvarchar) AND CodBodega NOT IN (8,15,16,17,19,20,23,29,31,32,33,35,36,46)"
         val stmt = db?.prepareStatement(sql)
         val rs = stmt?.executeQuery()
         var codBodega = 0
@@ -66,7 +66,7 @@ class Levantamiento {
 
     fun getCodLevantamiento(polin :String,codBodega : Int,codSucursal: Int,codUser:Int,codRubro: Int): Int {
         val db = LevInvconn().dbConn()
-        val sql = "SELECT CodLevantamiento FROM TBLLEVANTINVENCABEZADO WHERE Polin = CAST( '$polin' as nvarchar) AND CodBodega = $codBodega AND CodSucursal = $codSucursal"
+        val sql = "SELECT CodLevantamiento FROM TBLLEVANTINVENCABEZADO WHERE Polin = CAST( '($polin)' as nvarchar) AND CodBodega = $codBodega AND CodSucursal = $codSucursal"
         val stmt = db?.prepareStatement(sql)
         val rs = stmt?.executeQuery()
         var codLevantamiento = 0
@@ -141,5 +141,13 @@ class Levantamiento {
         if (stmt?.execute()==true) {
             println("ConteoIngreso guardado")
         }
+    }
+
+    fun rubroArticulo(codRubro: Int, codigo: String): Boolean {
+        val db = SfexConn().dbConn()
+        val sql = "SELECT CodRubro FROM Inventario.CatArticulos WHERE CodRubro = $codRubro AND CodArticulo = '$codigo'"
+        val stmt = db?.prepareStatement(sql)
+        val rs = stmt?.executeQuery()
+        return rs?.next()==true
     }
 }

@@ -23,4 +23,7 @@
     <string name="ancho">Ancho</string>
     <string name="alto">Alto</string>
     <string name="largo">Largo</string>
+    <string name="segundoConteo">Segundo Conteo</string>
+    <string name="tererConteo">Tercer Conteo</string>
+    <string name="primerConteo">Primer Conteo</string>
 </resources>

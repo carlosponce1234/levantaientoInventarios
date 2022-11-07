@@ -28,111 +28,114 @@ class Inventario : AppCompatActivity() {
 
         val btnScan = this.findViewById<Button>(R.id.scanqr)
         btnScan.setOnClickListener {
-            this.performeAction()
+          //  this.performeAction()
+           // actualizarTexto(bodega,sucursal,rubro,codUser)
+            performeAction()
         }
+
+        val textField = this.findViewById<TextView>(R.id.conteo)
+        textField.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                actualizarTexto(bodega,sucursal,rubro,codUser)
+            }
+        }
+
 
         val btnguardar = this.findViewById<Button>(R.id.btnguardar)
         btnguardar.setOnClickListener {
             val etiqueta = this.findViewById<TextView>(R.id.etiqueta).text.toString()
-            val polin = this.findViewById<TextView>(R.id.ubicacion).text.toString()
-            val codBodega = Levantamiento().getCodBodega(bodega.toString())
-            val codSucursal = Levantamiento().getCodSucursal(sucursal.toString())
-            val codRubro = Levantamiento().getCodRubro(rubro.toString())
-            val brazo = this.findViewById<TextView>(R.id.brazo).text.toString()
-            val codigo = this.findViewById<TextView>(R.id.codigo).text.toString()
-            val ancho = this.findViewById<TextView>(R.id.ancho).text.toString()
-            val alto = this.findViewById<TextView>(R.id.alto).text.toString()
-            val largo = this.findViewById<TextView>(R.id.largo).text.toString()
-            val codMedida =
-                Levantamiento().getCodMedida(alto.toFloat(), ancho.toFloat(), largo.toFloat())
-            val codLev = codUser?.let { it1 ->
-                Levantamiento().getCodLevantamiento(
-                    polin,
-                    codBodega,
-                    codSucursal,
-                    it1.toInt(),
-                    codRubro
-                )
-            }
-            val pconteo = this.findViewById<TextView>(R.id.conteo).text.toString()
-            if (pconteo.isEmpty() || pconteo == "0" || pconteo.isBlank()) {
-                Toast.makeText(this, "Debe ingresar el conteo", Toast.LENGTH_LONG).show()
-            } else {
-                if (Levantamiento().piezaCompleta(codMedida, codigo)) {
-                    if (!Levantamiento().etiquetaRepetida(
-                            etiqueta.toInt(),
-                            codLev.toString().toInt(),
-                            codBodega
-                        )
-                    ) {
-                        Levantamiento().guardarPconteo(
-                            codLev.toString().toInt(),
-                            codigo,
-                            brazo,
-                            codMedida,
-                            ancho.toFloat(),
-                            alto.toFloat(),
-                            largo.toFloat(),
-                            pconteo.toFloat(),
-                            etiqueta.toInt(),
-                            codBodega
-                        )
-                        this.findViewById<TextView>(R.id.conteo).text = ""
-                        this.findViewById<TextView>(R.id.etiqueta).text = ""
-                        this.findViewById<TextView>(R.id.ubicacion).text = ""
-                        this.findViewById<TextView>(R.id.brazo).text = ""
-                        this.findViewById<TextView>(R.id.codigo).text = ""
-                        this.findViewById<TextView>(R.id.descArt).text = ""
-                        this.findViewById<TextView>(R.id.ancho).text = ""
-                        this.findViewById<TextView>(R.id.alto).text = ""
-                        this.findViewById<TextView>(R.id.largo).text = ""
-                        Toast.makeText(this, "Guardado", Toast.LENGTH_SHORT).show()
-                    } else {
-                        if (Levantamiento().conteoCompleto(
-                                codLev.toString().toInt(),
-                                codBodega,
-                                codigo,
-                                etiqueta.toInt()
-                            )
-                        ) {
-                            Toast.makeText(this, "Etiqueta ya fue levantada", Toast.LENGTH_SHORT)
-                                .show()
-                            this.findViewById<TextView>(R.id.conteo).text = ""
-                            this.findViewById<TextView>(R.id.etiqueta).text = ""
-                            this.findViewById<TextView>(R.id.ubicacion).text = ""
-                            this.findViewById<TextView>(R.id.brazo).text = ""
-                            this.findViewById<TextView>(R.id.codigo).text = ""
-                            this.findViewById<TextView>(R.id.descArt).text = ""
-                            this.findViewById<TextView>(R.id.ancho).text = ""
-                            this.findViewById<TextView>(R.id.alto).text = ""
-                            this.findViewById<TextView>(R.id.largo).text = ""
-                        } else {
-                            if (Levantamiento().tieneSegundoConteo(
+            if (etiqueta.isEmpty()){
+                Toast.makeText(this, "Debe escanear un código de barras", Toast.LENGTH_SHORT).show()
+            }else {
+                val polin = this.findViewById<TextView>(R.id.ubicacion).text.toString()
+                val codBodega = Levantamiento().getCodBodega(bodega.toString())
+                val codSucursal = Levantamiento().getCodSucursal(sucursal.toString())
+                val codRubro = Levantamiento().getCodRubro(rubro.toString())
+                val brazo = this.findViewById<TextView>(R.id.brazo).text.toString()
+                val codigo = this.findViewById<TextView>(R.id.codigo).text.toString()
+                val ancho = this.findViewById<TextView>(R.id.ancho).text.toString()
+                val alto = this.findViewById<TextView>(R.id.alto).text.toString()
+                val largo = this.findViewById<TextView>(R.id.largo).text.toString()
+                val codMedida =
+                    Levantamiento().getCodMedida(alto.toFloat(), ancho.toFloat(), largo.toFloat())
+                val codLev = codUser?.let { it1 ->
+                    Levantamiento().getCodLevantamiento(
+                        polin,
+                        codBodega,
+                        codSucursal,
+                        it1.toInt(),
+                        codRubro
+                    )
+                }
+                val pconteo = this.findViewById<TextView>(R.id.conteo).text.toString()
+                if (pconteo.isEmpty() || pconteo == "0" || pconteo.isBlank()) {
+                    Toast.makeText(this, "Debe ingresar el conteo", Toast.LENGTH_LONG).show()
+                } else {
+                    if (Levantamiento().piezaCompleta(codMedida, codigo)) {
+                        if (Levantamiento().rubroArticulo(codRubro, codigo)) {
+                            if (!Levantamiento().etiquetaRepetida(
+                                    etiqueta.toInt(),
                                     codLev.toString().toInt(),
-                                    codBodega,
-                                    codigo,
-                                    etiqueta.toInt()
+                                    codBodega
                                 )
                             ) {
-                                val tipo = 1
-                                Levantamiento().updateConteo(
+                                Levantamiento().guardarPconteo(
                                     codLev.toString().toInt(),
                                     codigo,
-                                    etiqueta.toInt(),
-                                    codBodega,
+                                    brazo,
+                                    codMedida,
+                                    ancho.toFloat(),
+                                    alto.toFloat(),
+                                    largo.toFloat(),
                                     pconteo.toFloat(),
-                                    tipo
+                                    etiqueta.toInt(),
+                                    codBodega
                                 )
+                                Toast.makeText(this, "Guardado", Toast.LENGTH_SHORT).show()
                             } else {
-                                val tipo = 2
-                                Levantamiento().updateConteo(
-                                    codLev.toString().toInt(),
-                                    codigo,
-                                    etiqueta.toInt(),
-                                    codBodega,
-                                    pconteo.toFloat(),
-                                    tipo
-                                )
+                                if (Levantamiento().conteoCompleto(
+                                        codLev.toString().toInt(),
+                                        codBodega,
+                                        codigo,
+                                        etiqueta.toInt()
+                                    )
+                                ) {
+                                    Toast.makeText(
+                                        this,
+                                        "Etiqueta ya fue levantada",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                } else {
+                                    if (Levantamiento().tieneSegundoConteo(
+                                            codLev.toString().toInt(),
+                                            codBodega,
+                                            codigo,
+                                            etiqueta.toInt()
+                                        )
+                                    ) {
+                                        val tipo = 1
+                                        Levantamiento().updateConteo(
+                                            codLev.toString().toInt(),
+                                            codigo,
+                                            etiqueta.toInt(),
+                                            codBodega,
+                                            pconteo.toFloat(),
+                                            tipo
+                                        )
+                                    } else {
+                                        val tipo = 2
+                                        Levantamiento().updateConteo(
+                                            codLev.toString().toInt(),
+                                            codigo,
+                                            etiqueta.toInt(),
+                                            codBodega,
+                                            pconteo.toFloat(),
+                                            tipo
+                                        )
+                                    }
+                                    Toast.makeText(this, "Guardado", Toast.LENGTH_SHORT).show()
+                                }
                             }
                             this.findViewById<TextView>(R.id.conteo).text = ""
                             this.findViewById<TextView>(R.id.etiqueta).text = ""
@@ -143,13 +146,19 @@ class Inventario : AppCompatActivity() {
                             this.findViewById<TextView>(R.id.ancho).text = ""
                             this.findViewById<TextView>(R.id.alto).text = ""
                             this.findViewById<TextView>(R.id.largo).text = ""
-                            Toast.makeText(this, "Guardado", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "El articulo no pertenece al rubro",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
+                    } else {
+                        Toast.makeText(this, "Pieza no completa", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(this, "Pieza no completa", Toast.LENGTH_SHORT).show()
                 }
             }
+            findViewById<TextView>(R.id.conteo).clearFocus()
         }
         val btnFinalizar = this.findViewById<Button>(R.id.finalizar)
         btnFinalizar.setOnClickListener(){
@@ -161,7 +170,40 @@ class Inventario : AppCompatActivity() {
         }
     }
 
-    private fun performeAction() {
+    private fun actualizarTexto(bodega:String?,sucursal:String?,rubro:String?,codUser:String?) {
+        val etiqueta = this.findViewById<TextView>(R.id.etiqueta).text.toString()
+        val polin = this.findViewById<TextView>(R.id.ubicacion).text.toString()
+        val codBodega = Levantamiento().getCodBodega(bodega.toString())
+        val codSucursal = Levantamiento().getCodSucursal(sucursal.toString())
+        val codRubro = Levantamiento().getCodRubro(rubro.toString())
+        val codigo = this.findViewById<TextView>(R.id.codigo).text.toString()
+        val codLev = codUser?.let { it1 ->
+            Levantamiento().getCodLevantamiento(
+                polin,
+                codBodega,
+                codSucursal,
+                it1.toInt(),
+                codRubro
+            )
+        }
+        if (etiqueta.isNotEmpty()){
+            val txtConteo = findViewById<TextView>(R.id.textView14)
+            if (Levantamiento().etiquetaRepetida(etiqueta.toInt(),codLev.toString().toInt(),codBodega))
+            {
+                if (Levantamiento().tieneSegundoConteo(codLev.toString().toInt(),codBodega,codigo,etiqueta.toInt())){
+                    txtConteo.text=getString(R.string.tererConteo)
+                }else{
+                    txtConteo.text=getString(R.string.segundoConteo)
+                }
+            }else{
+                txtConteo.text=getString(R.string.primerConteo)
+            }
+        }else{
+            Toast.makeText(this, "Etiqueta vacia", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun performeAction(): Boolean {
         val integrator = IntentIntegrator(this)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
         integrator.setPrompt("Scan")
@@ -170,6 +212,7 @@ class Inventario : AppCompatActivity() {
         integrator.setOrientationLocked(false)
         integrator.setBarcodeImageEnabled(false)
         integrator.initiateScan()
+        return true
     }
 
     @SuppressLint("SetTextI18n")
