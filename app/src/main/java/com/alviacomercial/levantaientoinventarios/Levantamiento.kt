@@ -40,7 +40,7 @@ class Levantamiento {
         return codSucursal
     }
 
-    fun getDescArticulo(codArticulo: Int) : String {
+   /* fun getDescArticulo(codArticulo: Int) : String {
         val db = SfexConn().dbConn()
         val sql = "SELECT DesCatArt FROM Inventario.CatArticulos WHERE CodArticulo = $codArticulo"
         val stmt = db?.prepareStatement(sql)
@@ -51,7 +51,7 @@ class Levantamiento {
         }
         return descArticulo
     }
-
+*/
     /* fun getCodUser(user: String) : Int {
         val db = LevInvconn().dbConn()
         val sql = "SELECT CodUser FROM UserMovilApp WHERE UserLogin = CAST( '$user' as nvarchar)"
@@ -66,7 +66,7 @@ class Levantamiento {
 
     fun getCodLevantamiento(polin :String,codBodega : Int,codSucursal: Int,codUser:Int,codRubro: Int): Int {
         val db = LevInvconn().dbConn()
-        val sql = "SELECT CodLevantamiento FROM TBLLEVANTINVENCABEZADO WHERE Polin = CAST( '($polin)' as nvarchar) AND CodBodega = $codBodega AND CodSucursal = $codSucursal"
+        val sql = "SELECT CodLevantamiento FROM TBLLEVANTINVENCABEZADO WHERE Polin = CAST( '$polin' as nvarchar) AND CodBodega = $codBodega AND CodSucursal = $codSucursal"
         val stmt = db?.prepareStatement(sql)
         val rs = stmt?.executeQuery()
         var codLevantamiento = 0
