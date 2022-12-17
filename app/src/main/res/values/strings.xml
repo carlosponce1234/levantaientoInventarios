@@ -26,4 +26,6 @@
     <string name="segundoConteo">Segundo Conteo</string>
     <string name="tererConteo">Tercer Conteo</string>
     <string name="primerConteo">Primer Conteo</string>
+    <string name="NoConteo">No Admite Mas Conteo</string>
+    <string name="NoTercerConteo">No admite conteo</string>
 </resources>

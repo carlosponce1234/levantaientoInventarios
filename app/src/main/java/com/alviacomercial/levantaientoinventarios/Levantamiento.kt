@@ -66,7 +66,7 @@ class Levantamiento {
 
     fun getCodLevantamiento(polin :String,codBodega : Int,codSucursal: Int,codUser:Int,codRubro: Int): Int {
         val db = LevInvconn().dbConn()
-        val sql = "SELECT CodLevantamiento FROM TBLLEVANTINVENCABEZADO WHERE Polin = CAST( '$polin' as nvarchar) AND CodBodega = $codBodega AND CodSucursal = $codSucursal"
+        val sql = "SELECT CodLevantamiento FROM TBLLEVANTINVENCABEZADO WHERE Polin = CAST( ('$polin') as nvarchar) AND CodBodega = $codBodega AND CodSucursal = $codSucursal AND CAST(Fecha as date) Between CAST(DATEADD(DD,-10,GETDATE()) AS DATE) AND CAST(GETDATE() AS DATE) "
         val stmt = db?.prepareStatement(sql)
         val rs = stmt?.executeQuery()
         var codLevantamiento = 0

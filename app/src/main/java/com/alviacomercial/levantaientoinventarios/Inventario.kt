@@ -92,49 +92,21 @@ class Inventario : AppCompatActivity() {
                                     codBodega
                                 )
                                 Toast.makeText(this, "Guardado", Toast.LENGTH_SHORT).show()
+                                this.findViewById<TextView>(R.id.descArt).text = ""
                             } else {
-                                if (Levantamiento().conteoCompleto(
-                                        codLev.toString().toInt(),
-                                        codBodega,
-                                        codigo,
-                                        etiqueta.toInt()
-                                    )
-                                ) {
-                                    Toast.makeText(
-                                        this,
-                                        "Etiqueta ya fue levantada",
-                                        Toast.LENGTH_SHORT
-                                    )
-                                        .show()
+                                if (Levantamiento().conteoCompleto( codLev.toString().toInt(),codBodega,codigo,etiqueta.toInt())) {
+                                    Toast.makeText(this,"Etiqueta ya fue levantada",Toast.LENGTH_SHORT).show()
+                                    this.findViewById<TextView>(R.id.descArt).text = getString(R.string.NoTercerConteo)
                                 } else {
-                                    if (Levantamiento().tieneSegundoConteo(
-                                            codLev.toString().toInt(),
-                                            codBodega,
-                                            codigo,
-                                            etiqueta.toInt()
-                                        )
-                                    ) {
+                                    if (Levantamiento().tieneSegundoConteo(codLev.toString().toInt(),codBodega,codigo,etiqueta.toInt())) {
                                         val tipo = 1
-                                        Levantamiento().updateConteo(
-                                            codLev.toString().toInt(),
-                                            codigo,
-                                            etiqueta.toInt(),
-                                            codBodega,
-                                            pconteo.toFloat(),
-                                            tipo
-                                        )
+                                        Levantamiento().updateConteo(codLev.toString().toInt(),codigo,etiqueta.toInt(),codBodega,pconteo.toFloat(),tipo)
                                     } else {
                                         val tipo = 2
-                                        Levantamiento().updateConteo(
-                                            codLev.toString().toInt(),
-                                            codigo,
-                                            etiqueta.toInt(),
-                                            codBodega,
-                                            pconteo.toFloat(),
-                                            tipo
-                                        )
+                                        Levantamiento().updateConteo(codLev.toString().toInt(),codigo,etiqueta.toInt(),codBodega,pconteo.toFloat(),tipo)
                                     }
                                     Toast.makeText(this, "Guardado", Toast.LENGTH_SHORT).show()
+                                    this.findViewById<TextView>(R.id.descArt).text = ""
                                 }
                             }
                             this.findViewById<TextView>(R.id.conteo).text = ""
@@ -142,7 +114,6 @@ class Inventario : AppCompatActivity() {
                             this.findViewById<TextView>(R.id.ubicacion).text = ""
                             this.findViewById<TextView>(R.id.brazo).text = ""
                             this.findViewById<TextView>(R.id.codigo).text = ""
-                            this.findViewById<TextView>(R.id.descArt).text = ""
                             this.findViewById<TextView>(R.id.ancho).text = ""
                             this.findViewById<TextView>(R.id.alto).text = ""
                             this.findViewById<TextView>(R.id.largo).text = ""
